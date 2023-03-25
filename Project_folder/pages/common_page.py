@@ -18,6 +18,13 @@ class Commons(object):
     def wait_for_window_number_to_change(self, num):
         return self._wait.until(U.ec.number_of_windows_to_be(num))
 
+    def switch_tabs(self, tab_to_switch):
+        self.wait_for_window_number_to_change(2)
+        for tab in self.driver.window_handles:
+            if tab != tab_to_switch:
+                self.driver.switch_to.window(tab)
+                break
+
     def wait_for_url_change(self, url):
         return self._wait.until(U.ec.url_to_be(url))
 
