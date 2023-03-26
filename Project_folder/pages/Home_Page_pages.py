@@ -1,4 +1,4 @@
-from Objects.Commons import Commons
+from Project_folder.pages.common_page import Commons
 
 
 class HomePage(Commons):

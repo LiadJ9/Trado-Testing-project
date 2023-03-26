@@ -1,6 +1,5 @@
 from Project_folder.pages.common_page import Commons
 import Project_folder.pages.Utils.TRADO_UTILS as U
-import Project_folder.MongoDB_requests as R
 
 
 class SignupPage(Commons):
@@ -13,12 +12,6 @@ class SignupPage(Commons):
     GOOGLE_LOGIN = (U.By.CLASS_NAME, 'login_google')
     FACEBOOK_LOGIN = (U.By.CLASS_NAME, 'login_facebook')
     TWITTER_LOGIN = (U.By.CLASS_NAME, 'login_twitter')
-    FIRST_NUMBER = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/form/div[1]/div[1]/span/input')
-    SECOND_NUMBER = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/form/div[1]/div[2]/span/input')
-    THIRD_NUMBER = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/form/div[1]/div[3]/span/input')
-    FOURTH_NUMBER = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/form/div[1]/div[4]/span/input')
-    FIFTH_NUMBER = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/form/div[1]/div[5]/span/input')
-    SUBMIT_CONFIRMATION = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/form/input')
     RESTAURANTS = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/div/div[2]/div[1]')
     COCKTAILS = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/div/div[2]/div[2]')
     CONFIRM_PREFERENCE = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/div/div[3]/button')
@@ -63,36 +56,6 @@ class SignupPage(Commons):
     def confirm_preference(self):
         self.wait_for_clickable(SignupPage.CONFIRM_PREFERENCE).click()
 
-    # USED TO SUBMIT THE SECURITY CONFIRMATION CODE :)
-
-    def click_submit_confirmation(self):
-        self.wait_for_clickable(SignupPage.SUBMIT_CONFIRMATION).click()
-
-    # TO BE USED ONLY IN THE SECURITY CODE PAGE - INSERTS THE SECURITY CODE STRAIGHT FROM THE DB - IT ALSO RETURNS IT FOR LATER USE (MAYBE)
-
-    def insert_security_code(self, phone_number, false_flag):
-        self.wait_for(SignupPage.SUBMIT_CONFIRMATION)
-        requests = R.MongoRequests()
-        login_code = requests.find_login_code(phone_number)
-        signup_list = [
-            SignupPage.FIRST_NUMBER,
-            SignupPage.SECOND_NUMBER,
-            SignupPage.THIRD_NUMBER,
-            SignupPage.FOURTH_NUMBER,
-            SignupPage.FIFTH_NUMBER
-        ]
-        list_count = 0
-        if false_flag:
-            for f in '00000':
-                self.insert(signup_list[list_count], f)
-                list_count += 1
-        else:
-            for i in login_code:
-                self.insert(signup_list[list_count], i)
-                list_count += 1
-        SignupPage.click_submit_confirmation(self)
-        return login_code
-
     # Advanced pages #
 
     # all additional variables are used to determine which actions should be performed for additional testing parameters :0 (wow!)
@@ -121,9 +84,9 @@ class SignupPage(Commons):
             SignupPage.click_main_ads_button(self)
         SignupPage.click_submit(self)
         if validcode:
-            login_code = SignupPage.insert_security_code(self, phone_number, False)
+            login_code = Commons.insert_security_code(self, phone_number, False)
         else:
-            login_code = SignupPage.insert_security_code(self, phone_number, True)
+            login_code = Commons.insert_security_code(self, phone_number, True)
         if pref1:
             SignupPage.click_restaurant(self)
         if pref2:
