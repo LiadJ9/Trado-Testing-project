@@ -1,9 +1,10 @@
 import Project_folder.pages.Utils.TRADO_UTILS as U
 from Project_folder.pages.common_page import Commons
-from Project_folder.pages.Registration_pages import SignupPage as SP
 
 
 class LoginPage(Commons):
+
+    # Login Locators
 
     PHONE_NUMBER = (U.By.XPATH, '/html/body/div[1]/div/div[4]/div/div/div/div/form/div[1]/div[1]/span/input')
     REMEMBER_ME = (U.By.CSS_SELECTOR, '.micon-check')
@@ -45,6 +46,7 @@ class LoginPage(Commons):
             LoginPage.click_remember_me(self)
         LoginPage.click_submit_button(self)
         Commons.insert_security_code(self, phone_number, security_off)
+        U.sleep(1)
 
     def find_error(self):
         self.wait_for(LoginPage.LOGIN_ERROR)

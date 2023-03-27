@@ -6,6 +6,7 @@ class Commons(object):
     def __init__(self, driver):
         self.driver = driver
         self._wait = U.wdw(self.driver, 10)
+        self._qwait = U.wdw(self.driver, 2)
 
     def wait_for(self, locator):
         return self._wait.until(U.ec.presence_of_element_located(locator))
@@ -15,6 +16,9 @@ class Commons(object):
 
     def wait_for_invisibility(self, locator):
         return self._wait.until(U.ec.invisibility_of_element(locator))
+
+    def quick_wait_for_invisibility(self, locator):
+        return self._qwait.until(U.ec.invisibility_of_element(locator))
 
     def wait_for_window_number_to_change(self, num):
         return self._wait.until(U.ec.number_of_windows_to_be(num))
@@ -45,6 +49,17 @@ class Commons(object):
     def insert(self, locator, insertion):
         locator = self.driver.find_element(*locator)
         locator.send_keys(insertion)
+
+    def get_element_size(self, locator):
+        div = self.driver.find_element(*locator)
+        amount = list(div.find_elements(U.By.TAG_NAME, 'a'))
+        size = len(amount)
+        return size
+
+    def get_css(self, locator, value):
+        css = self.driver.find_element(*locator)
+        val = css.value_of_css_property(value)
+        return val
 
     # HEADER AND WELCOME LOCATORS #
 

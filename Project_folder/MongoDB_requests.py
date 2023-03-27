@@ -7,6 +7,7 @@ class MongoCommons(object):
             'mongodb+srv://qa_agency:veHt1JK5@cluster0.qnr3p.mongodb.net/trado_qa?retryWrites=true&w=majority')
         self.db = self.client['trado_qa']
         self.users = self.db['users']
+        self.products = self.db['products']
 
 
 class MongoRequests(MongoCommons):
@@ -25,3 +26,7 @@ class MongoRequests(MongoCommons):
             existing_user = user
             mailing_list = existing_user.get('marketingList')
             return mailing_list
+
+    def get_product_count(self):
+        doc_count = self.products.estimated_document_count()
+        return doc_count
