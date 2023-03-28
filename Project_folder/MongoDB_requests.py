@@ -7,6 +7,7 @@ class MongoCommons(object):
             'mongodb+srv://qa_agency:veHt1JK5@cluster0.qnr3p.mongodb.net/trado_qa?retryWrites=true&w=majority')
         self.db = self.client['trado_qa']
         self.users = self.db['users']
+        self.products = self.db['products']
 
 
 class MongoRequests(MongoCommons):
@@ -25,3 +26,20 @@ class MongoRequests(MongoCommons):
             existing_user = user
             mailing_list = existing_user.get('marketingList')
             return mailing_list
+
+    def get_product_count(self):
+        doc_count = self.products.estimated_document_count()
+        return doc_count
+
+    def get_product_info(self, product_id):
+        for product in self.products.find({'barcode': product_id}):
+            current_product = product
+            units = current_product.get('units')
+            units_in_carton = units.get('unitsInCarton')
+            stock = current_product.get('productStock')
+            price = current_product.get('price')
+            return int(stock), float(price), int(units_in_carton)
+
+
+
+
