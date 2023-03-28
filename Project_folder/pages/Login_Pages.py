@@ -46,7 +46,7 @@ class LoginPage(Commons):
             LoginPage.click_remember_me(self)
         LoginPage.click_submit_button(self)
         Commons.insert_security_code(self, phone_number, security_off)
-        U.sleep(1)
+        U.sleep(3)
 
     def find_error(self):
         self.wait_for(LoginPage.LOGIN_ERROR)

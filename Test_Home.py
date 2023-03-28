@@ -158,7 +158,7 @@ def test_carousel_max(driver):
 
 
 @allure.epic('Test Home')
-@allure.id(59)
+@allure.id(34)
 @allure.title('Highlight carousel pages work as intended (Logged in)')
 @allure.description('The featured pages in the Highlight carousel will redirect me to the appropriate page')
 def test_carousel_pages(driver):
@@ -175,7 +175,7 @@ def test_carousel_pages(driver):
 
 
 @allure.epic('Test Home')
-@allure.id(60)
+@allure.id(33)
 @allure.title('Products listed == Products in DB')
 @allure.description('Verifying that the amount of products listed as available is number of products in db')
 def test_product_count_in_db(driver):

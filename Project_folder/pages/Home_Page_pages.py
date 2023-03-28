@@ -38,7 +38,7 @@ class HomePage(Commons):
         self.wait_for(HomePage.CONTACT_US_REDIRECT).click()
 
     def click_shipment_redirect(self):
-        self.wait_for(HomePage.CONTACT_US_REDIRECT).click()
+        self.wait_for(HomePage.SHIPMENT_REDIRECT).click()
 
     def click_carousel(self, tleft_rightf):
         if tleft_rightf:
@@ -74,6 +74,10 @@ class HomePage(Commons):
     def get_first_product_price(self):
         self.wait_for(HomePage.FIRST_PRODUCT_PRICE)
         valued_price = self.get_text(HomePage.FIRST_PRODUCT_PRICE)
+        valued_price = re.findall(r'\d+\.\d+', f'{valued_price}')
+        for i in valued_price:
+            num = i
+            return float(num)
         return valued_price
 
     def get_item_list_size(self):
@@ -96,8 +100,8 @@ class HomePage(Commons):
         U.sleep(1)
 
     def max_visibility(self):
-        max = self.find(HomePage.MAX_VISIBILITY)
-        return max.is_displayed()
+        maxs = self.find(HomePage.MAX_VISIBILITY)
+        return maxs.is_displayed()
 
 
 

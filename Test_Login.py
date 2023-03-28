@@ -26,8 +26,9 @@ def test_log_in_with_valid_info(driver):
     with allure.step('Logging into new account'):
         login.log_in(phone_number, True, False)
     with allure.step('Asserting user has logged in'):
+
         txt = common.get_text(common.HEADER_LOGIN)
-        assert txt == 'שלום אורח,\nהתחברות'
+        assert txt == 'שלום ,\nאזור אישי'
 
 
 @allure.epic('Test Login')

@@ -50,6 +50,11 @@ class Commons(object):
         locator = self.driver.find_element(*locator)
         locator.send_keys(insertion)
 
+    def clear(self, locator):
+        locator = self.driver.find_element(*locator)
+        locator.click()
+        locator.send_keys(U.keys.CLEAR)
+
     def get_element_size(self, locator):
         div = self.driver.find_element(*locator)
         amount = list(div.find_elements(U.By.TAG_NAME, 'a'))
@@ -144,5 +149,5 @@ class Commons(object):
     @staticmethod
     def random_phone_number():
         nums = U.string.digits
-        phone_number = (''.join(U.random.choice(nums) for _ in range(9)))
-        return f'0{phone_number}'
+        phone_number = (''.join(U.random.choice(nums) for _ in range(7)))
+        return f'057{phone_number}'

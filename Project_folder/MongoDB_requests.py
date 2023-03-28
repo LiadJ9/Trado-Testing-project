@@ -30,3 +30,16 @@ class MongoRequests(MongoCommons):
     def get_product_count(self):
         doc_count = self.products.estimated_document_count()
         return doc_count
+
+    def get_product_info(self, product_id):
+        for product in self.products.find({'barcode': product_id}):
+            current_product = product
+            units = current_product.get('units')
+            units_in_carton = units.get('unitsInCarton')
+            stock = current_product.get('productStock')
+            price = current_product.get('price')
+            return int(stock), float(price), int(units_in_carton)
+
+
+
+
