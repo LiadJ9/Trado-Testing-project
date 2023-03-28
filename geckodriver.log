@@ -28577,3 +28577,13 @@ JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error:
 JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
 JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
 JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+1680034283205	geckodriver	INFO	Listening on 127.0.0.1:60833
+1680034286268	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "60834" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\liad\\AppData\\Local\\Temp\\rust_mozprofileL1vmu4"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680034286609	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680034286615	Marionette	INFO	Listening on port 60856
+WebDriver BiDi listening on ws://127.0.0.1:60834
+Read port: 60856
+1680034286854	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
